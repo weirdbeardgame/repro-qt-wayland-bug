@@ -1,0 +1,114 @@
+{
+	"kind" : "toolchains",
+	"toolchains" : 
+	[
+		{
+			"compiler" : 
+			{
+				"id" : "Clang",
+				"implicit" : 
+				{
+					"includeDirectories" : 
+					[
+						"/opt/intel/oneapi/tbb/2021.12/include",
+						"/usr/lib/clang/18/include",
+						"/usr/local/include",
+						"/include"
+					],
+					"linkDirectories" : 
+					[
+						"/usr/lib64/gcc/x86_64-pc-linux-gnu/14.1.1",
+						"/usr/lib64",
+						"/lib64",
+						"/lib",
+						"/usr/lib",
+						"/opt/intel/oneapi/tbb/2021.12/lib/intel64/gcc4.8",
+						"/opt/intel/oneapi/compiler/2024.1/lib"
+					],
+					"linkFrameworkDirectories" : [],
+					"linkLibraries" : 
+					[
+						"gcc",
+						"gcc_s",
+						"c",
+						"gcc",
+						"gcc_s"
+					]
+				},
+				"path" : "/usr/bin/clang",
+				"version" : "18.1.8"
+			},
+			"language" : "C",
+			"sourceFileExtensions" : 
+			[
+				"c",
+				"m"
+			]
+		},
+		{
+			"compiler" : 
+			{
+				"id" : "Clang",
+				"implicit" : 
+				{
+					"includeDirectories" : 
+					[
+						"/opt/intel/oneapi/tbb/2021.12/include",
+						"/usr/include/c++/14.1.1",
+						"/usr/include/c++/14.1.1/x86_64-pc-linux-gnu",
+						"/usr/include/c++/14.1.1/backward",
+						"/usr/lib/clang/18/include",
+						"/usr/local/include",
+						"/include"
+					],
+					"linkDirectories" : 
+					[
+						"/usr/lib64/gcc/x86_64-pc-linux-gnu/14.1.1",
+						"/usr/lib64",
+						"/lib64",
+						"/lib",
+						"/usr/lib",
+						"/opt/intel/oneapi/tbb/2021.12/lib/intel64/gcc4.8",
+						"/opt/intel/oneapi/compiler/2024.1/lib"
+					],
+					"linkFrameworkDirectories" : [],
+					"linkLibraries" : 
+					[
+						"stdc++",
+						"m",
+						"gcc_s",
+						"gcc",
+						"c",
+						"gcc_s",
+						"gcc"
+					]
+				},
+				"path" : "/usr/bin/clang++",
+				"version" : "18.1.8"
+			},
+			"language" : "CXX",
+			"sourceFileExtensions" : 
+			[
+				"C",
+				"M",
+				"c++",
+				"cc",
+				"cpp",
+				"cxx",
+				"mm",
+				"mpp",
+				"CPP",
+				"ixx",
+				"cppm",
+				"ccm",
+				"cxxm",
+				"c++m"
+			]
+		}
+	],
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 0
+	}
+}

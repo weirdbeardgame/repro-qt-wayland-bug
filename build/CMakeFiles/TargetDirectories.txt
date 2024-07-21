@@ -1,0 +1,5 @@
+/home/ty/attach-bug/build/CMakeFiles/attach_bug.dir
+/home/ty/attach-bug/build/CMakeFiles/edit_cache.dir
+/home/ty/attach-bug/build/CMakeFiles/rebuild_cache.dir
+/home/ty/attach-bug/build/CMakeFiles/attach_bug_autogen_timestamp_deps.dir
+/home/ty/attach-bug/build/CMakeFiles/attach_bug_autogen.dir
