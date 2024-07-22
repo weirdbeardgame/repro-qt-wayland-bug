@@ -1,5 +1,8 @@
 #pragma once
 
+#include "ReplacementWidget.h"
+#include "InitialWidget.h"
+
 #include <QMainWindow>
 #include <QListWidget>
 
@@ -20,6 +23,6 @@ private slots:
 private:
 	Ui::MainWindow ui;
 
-	QListWidget *initialWidget;
-	QListWidget *replacementWidget = nullptr;
+	InitialWidget *initialWidget = nullptr;
+	ReplacementWidget *replacementWidget = nullptr;
 };

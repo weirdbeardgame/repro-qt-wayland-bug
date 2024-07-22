@@ -73,6 +73,22 @@ build CMakeFiles/attach_bug.dir/MainWindow.cpp.o: CXX_COMPILER__attach_bug_unsca
   OBJECT_DIR = CMakeFiles/attach_bug.dir
   OBJECT_FILE_DIR = CMakeFiles/attach_bug.dir
 
+build CMakeFiles/attach_bug.dir/ReplacementWidget.cpp.o: CXX_COMPILER__attach_bug_unscanned_Debug /home/ty/attach-bug/ReplacementWidget.cpp || cmake_object_order_depends_target_attach_bug
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
+  DEP_FILE = CMakeFiles/attach_bug.dir/ReplacementWidget.cpp.o.d
+  FLAGS = -g -fno-direct-access-external-data
+  INCLUDES = -I/home/ty/attach-bug/build/attach_bug_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtWidgets -isystem /usr/include/qt6/QtGui
+  OBJECT_DIR = CMakeFiles/attach_bug.dir
+  OBJECT_FILE_DIR = CMakeFiles/attach_bug.dir
+
+build CMakeFiles/attach_bug.dir/InitialWidget.cpp.o: CXX_COMPILER__attach_bug_unscanned_Debug /home/ty/attach-bug/InitialWidget.cpp || cmake_object_order_depends_target_attach_bug
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
+  DEP_FILE = CMakeFiles/attach_bug.dir/InitialWidget.cpp.o.d
+  FLAGS = -g -fno-direct-access-external-data
+  INCLUDES = -I/home/ty/attach-bug/build/attach_bug_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtWidgets -isystem /usr/include/qt6/QtGui
+  OBJECT_DIR = CMakeFiles/attach_bug.dir
+  OBJECT_FILE_DIR = CMakeFiles/attach_bug.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target attach_bug
@@ -81,7 +97,7 @@ build CMakeFiles/attach_bug.dir/MainWindow.cpp.o: CXX_COMPILER__attach_bug_unsca
 #############################################
 # Link the executable attach_bug
 
-build attach_bug: CXX_EXECUTABLE_LINKER__attach_bug_Debug CMakeFiles/attach_bug.dir/attach_bug_autogen/mocs_compilation.cpp.o CMakeFiles/attach_bug.dir/main.cpp.o CMakeFiles/attach_bug.dir/MainWindow.cpp.o | /usr/lib/libQt6Widgets.so.6.7.2 /usr/lib/libQt6Gui.so.6.7.2 /usr/lib/libQt6Core.so.6.7.2 /usr/lib/libGLX.so /usr/lib/libOpenGL.so || attach_bug_autogen attach_bug_autogen_timestamp_deps
+build attach_bug: CXX_EXECUTABLE_LINKER__attach_bug_Debug CMakeFiles/attach_bug.dir/attach_bug_autogen/mocs_compilation.cpp.o CMakeFiles/attach_bug.dir/main.cpp.o CMakeFiles/attach_bug.dir/MainWindow.cpp.o CMakeFiles/attach_bug.dir/ReplacementWidget.cpp.o CMakeFiles/attach_bug.dir/InitialWidget.cpp.o | /usr/lib/libQt6Widgets.so.6.7.2 /usr/lib/libQt6Gui.so.6.7.2 /usr/lib/libQt6Core.so.6.7.2 /usr/lib/libGLX.so /usr/lib/libOpenGL.so || attach_bug_autogen attach_bug_autogen_timestamp_deps
   FLAGS = -g
   LINK_LIBRARIES = /usr/lib/libQt6Widgets.so.6.7.2  /usr/lib/libQt6Gui.so.6.7.2  /usr/lib/libQt6Core.so.6.7.2  /usr/lib/libGLX.so  /usr/lib/libOpenGL.so
   OBJECT_DIR = CMakeFiles/attach_bug.dir
@@ -124,7 +140,7 @@ build attach_bug_autogen_timestamp_deps: phony
 #############################################
 # Utility command for attach_bug_autogen
 
-build attach_bug_autogen: phony CMakeFiles/attach_bug_autogen attach_bug_autogen/include/ui_MainWindow.h attach_bug_autogen/timestamp attach_bug_autogen/mocs_compilation.cpp attach_bug_autogen_timestamp_deps
+build attach_bug_autogen: phony CMakeFiles/attach_bug_autogen attach_bug_autogen/include/ui_MainWindow.h attach_bug_autogen/include/ui_InitialWidget.h attach_bug_autogen/timestamp attach_bug_autogen/mocs_compilation.cpp attach_bug_autogen_timestamp_deps
 
 
 #############################################
@@ -141,7 +157,7 @@ build attach_bug_autogen/timestamp attach_bug_autogen/mocs_compilation.cpp | ${c
 #############################################
 # Phony custom command for CMakeFiles/attach_bug_autogen
 
-build CMakeFiles/attach_bug_autogen attach_bug_autogen/include/ui_MainWindow.h | ${cmake_ninja_workdir}CMakeFiles/attach_bug_autogen ${cmake_ninja_workdir}attach_bug_autogen/include/ui_MainWindow.h: phony attach_bug_autogen/timestamp || attach_bug_autogen_timestamp_deps
+build CMakeFiles/attach_bug_autogen attach_bug_autogen/include/ui_MainWindow.h attach_bug_autogen/include/ui_InitialWidget.h | ${cmake_ninja_workdir}CMakeFiles/attach_bug_autogen ${cmake_ninja_workdir}attach_bug_autogen/include/ui_MainWindow.h ${cmake_ninja_workdir}attach_bug_autogen/include/ui_InitialWidget.h: phony attach_bug_autogen/timestamp || attach_bug_autogen_timestamp_deps
 
 # =============================================================================
 # Target aliases.

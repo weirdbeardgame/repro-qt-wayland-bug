@@ -5,16 +5,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
 	ui.setupUi(this);
 
-	initialWidget = new QListWidget(this);
-	// set background color
-	initialWidget->setStyleSheet("background-color: #fff0f0;");
-
-	// fill initialWidget with some items
-	for (int i = 0; i < 100; i++)
-	{
-		initialWidget->addItem(QString("Item %1").arg(i));
-	}
-
+	initialWidget = new InitialWidget(this);
+	initialWidget->setStyleSheet("background-color: #f0f0ff;");
 	setCentralWidget(initialWidget);
 }
 
@@ -31,16 +23,12 @@ void MainWindow::on_actionDetach_triggered()
 
 	if(replacementWidget == nullptr)
 	{
-		replacementWidget = new QListWidget(this);
-		replacementWidget->setStyleSheet("background-color: #f0fff0;");
-		for(int i = 99; i >= 0; i--)
-		{
-			replacementWidget->addItem(QString("Item %1").arg(i));
-		}
+		replacementWidget = new ReplacementWidget(this);
 	}
 
 	setCentralWidget(replacementWidget);
 	replacementWidget->setFocus();
+	update();
 }
 
 void MainWindow::on_actionAttach_triggered()
@@ -48,10 +36,10 @@ void MainWindow::on_actionAttach_triggered()
 	takeCentralWidget();
 	initialWidget->setVisible(true);
 	
-	replacementWidget->deleteLater();
+	//replacementWidget->deleteLater();
 	replacementWidget = nullptr;
 
 	setCentralWidget(initialWidget);
 	initialWidget->show();
-	initialWidget->setFocus();
+	update();
 }

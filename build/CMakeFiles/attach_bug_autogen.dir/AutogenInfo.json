@@ -430,9 +430,21 @@
 	"HEADERS" : 
 	[
 		[
+			"/home/ty/attach-bug/InitialWidget.h",
+			"MU",
+			"EWIEGA46WW/moc_InitialWidget.cpp",
+			null
+		],
+		[
 			"/home/ty/attach-bug/MainWindow.h",
 			"MU",
 			"EWIEGA46WW/moc_MainWindow.cpp",
+			null
+		],
+		[
+			"/home/ty/attach-bug/ReplacementWidget.h",
+			"MU",
+			"EWIEGA46WW/moc_ReplacementWidget.cpp",
 			null
 		]
 	],
@@ -495,7 +507,9 @@
 	"SETTINGS_FILE" : "/home/ty/attach-bug/build/CMakeFiles/attach_bug_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[ "/home/ty/attach-bug/InitialWidget.cpp", "MU", null ],
 		[ "/home/ty/attach-bug/MainWindow.cpp", "MU", null ],
+		[ "/home/ty/attach-bug/ReplacementWidget.cpp", "MU", null ],
 		[ "/home/ty/attach-bug/main.cpp", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],

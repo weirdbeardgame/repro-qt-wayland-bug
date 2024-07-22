@@ -1,7 +1,11 @@
 attach_bug_autogen/timestamp: \
 	/home/ty/attach-bug/CMakeLists.txt \
+	/home/ty/attach-bug/InitialWidget.cpp \
+	/home/ty/attach-bug/InitialWidget.h \
 	/home/ty/attach-bug/MainWindow.cpp \
 	/home/ty/attach-bug/MainWindow.h \
+	/home/ty/attach-bug/ReplacementWidget.cpp \
+	/home/ty/attach-bug/ReplacementWidget.h \
 	/home/ty/attach-bug/build/CMakeFiles/3.30.1/CMakeCCompiler.cmake \
 	/home/ty/attach-bug/build/CMakeFiles/3.30.1/CMakeCXXCompiler.cmake \
 	/home/ty/attach-bug/build/CMakeFiles/3.30.1/CMakeSystem.cmake \
@@ -643,6 +647,7 @@ attach_bug_autogen/timestamp: \
 	/usr/include/qt6/QtGui/qwindowdefs.h \
 	/usr/include/qt6/QtWidgets/QListWidget \
 	/usr/include/qt6/QtWidgets/QMainWindow \
+	/usr/include/qt6/QtWidgets/QWidget \
 	/usr/include/qt6/QtWidgets/qabstractitemdelegate.h \
 	/usr/include/qt6/QtWidgets/qabstractitemview.h \
 	/usr/include/qt6/QtWidgets/qabstractscrollarea.h \
@@ -744,5 +749,6 @@ attach_bug_autogen/timestamp: \
 	/usr/share/cmake/Modules/Platform/Linux-Initialize.cmake \
 	/usr/share/cmake/Modules/Platform/Linux.cmake \
 	/usr/share/cmake/Modules/Platform/UnixPaths.cmake \
+	/home/ty/attach-bug/InitialWidget.ui \
 	/home/ty/attach-bug/MainWindow.ui \
 	/usr/bin/cmake

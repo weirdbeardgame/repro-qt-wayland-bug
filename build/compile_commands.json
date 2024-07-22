@@ -16,5 +16,17 @@
   "command": "/usr/bin/clang++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/ty/attach-bug/build/attach_bug_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtWidgets -isystem /usr/include/qt6/QtGui -g -fno-direct-access-external-data -o CMakeFiles/attach_bug.dir/MainWindow.cpp.o -c /home/ty/attach-bug/MainWindow.cpp",
   "file": "/home/ty/attach-bug/MainWindow.cpp",
   "output": "CMakeFiles/attach_bug.dir/MainWindow.cpp.o"
+},
+{
+  "directory": "/home/ty/attach-bug/build",
+  "command": "/usr/bin/clang++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/ty/attach-bug/build/attach_bug_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtWidgets -isystem /usr/include/qt6/QtGui -g -fno-direct-access-external-data -o CMakeFiles/attach_bug.dir/ReplacementWidget.cpp.o -c /home/ty/attach-bug/ReplacementWidget.cpp",
+  "file": "/home/ty/attach-bug/ReplacementWidget.cpp",
+  "output": "CMakeFiles/attach_bug.dir/ReplacementWidget.cpp.o"
+},
+{
+  "directory": "/home/ty/attach-bug/build",
+  "command": "/usr/bin/clang++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/ty/attach-bug/build/attach_bug_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtWidgets -isystem /usr/include/qt6/QtGui -g -fno-direct-access-external-data -o CMakeFiles/attach_bug.dir/InitialWidget.cpp.o -c /home/ty/attach-bug/InitialWidget.cpp",
+  "file": "/home/ty/attach-bug/InitialWidget.cpp",
+  "output": "CMakeFiles/attach_bug.dir/InitialWidget.cpp.o"
 }
 ]

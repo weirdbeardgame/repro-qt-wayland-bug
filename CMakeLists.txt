@@ -14,6 +14,11 @@ set(PROJECT_SOURCES
 	MainWindow.h
 	MainWindow.cpp
 	MainWindow.ui
+	ReplacementWidget.cpp
+	ReplacementWidget.h
+	InitialWidget.cpp
+	InitialWidget.h
+	InitialWidget.ui
 )
 
 qt_add_executable(attach_bug ${PROJECT_SOURCES})
