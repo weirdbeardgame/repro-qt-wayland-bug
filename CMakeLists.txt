@@ -24,6 +24,8 @@ set(PROJECT_SOURCES
 	InitialWidget.ui
     DisplayWidget.h
     DisplayWidget.cpp
+    GLContextEGL.h
+    GLContextEGL.cpp
 )
 
 qt_add_executable(attach_bug ${PROJECT_SOURCES})
