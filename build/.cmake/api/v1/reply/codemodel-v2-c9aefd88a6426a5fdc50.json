@@ -43,7 +43,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "attach_bug::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-attach_bug-Debug-419430cb377900c55e2a.json",
+					"jsonFile" : "target-attach_bug-Debug-1f09be1bb1c60dea6c72.json",
 					"name" : "attach_bug",
 					"projectIndex" : 0
 				},
@@ -67,8 +67,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/ty/attach-bug/build",
-		"source" : "/home/ty/attach-bug"
+		"build" : "/mnt/Data/coding/repro-qt-wayland-bug/build",
+		"source" : "/mnt/Data/coding/repro-qt-wayland-bug"
 	},
 	"version" : 
 	{

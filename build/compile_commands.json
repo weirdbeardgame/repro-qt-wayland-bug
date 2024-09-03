@@ -1,32 +1,38 @@
 [
 {
-  "directory": "/home/ty/attach-bug/build",
-  "command": "/usr/bin/clang++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/ty/attach-bug/build/attach_bug_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtWidgets -isystem /usr/include/qt6/QtGui -g -fno-direct-access-external-data -o CMakeFiles/attach_bug.dir/attach_bug_autogen/mocs_compilation.cpp.o -c /home/ty/attach-bug/build/attach_bug_autogen/mocs_compilation.cpp",
-  "file": "/home/ty/attach-bug/build/attach_bug_autogen/mocs_compilation.cpp",
+  "directory": "/mnt/Data/coding/repro-qt-wayland-bug/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/mnt/Data/coding/repro-qt-wayland-bug/build/attach_bug_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtWidgets -isystem /usr/include/qt6/QtGui -g -mno-direct-extern-access -o CMakeFiles/attach_bug.dir/attach_bug_autogen/mocs_compilation.cpp.o -c /mnt/Data/coding/repro-qt-wayland-bug/build/attach_bug_autogen/mocs_compilation.cpp",
+  "file": "/mnt/Data/coding/repro-qt-wayland-bug/build/attach_bug_autogen/mocs_compilation.cpp",
   "output": "CMakeFiles/attach_bug.dir/attach_bug_autogen/mocs_compilation.cpp.o"
 },
 {
-  "directory": "/home/ty/attach-bug/build",
-  "command": "/usr/bin/clang++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/ty/attach-bug/build/attach_bug_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtWidgets -isystem /usr/include/qt6/QtGui -g -fno-direct-access-external-data -o CMakeFiles/attach_bug.dir/main.cpp.o -c /home/ty/attach-bug/main.cpp",
-  "file": "/home/ty/attach-bug/main.cpp",
+  "directory": "/mnt/Data/coding/repro-qt-wayland-bug/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/mnt/Data/coding/repro-qt-wayland-bug/build/attach_bug_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtWidgets -isystem /usr/include/qt6/QtGui -g -mno-direct-extern-access -o CMakeFiles/attach_bug.dir/main.cpp.o -c /mnt/Data/coding/repro-qt-wayland-bug/main.cpp",
+  "file": "/mnt/Data/coding/repro-qt-wayland-bug/main.cpp",
   "output": "CMakeFiles/attach_bug.dir/main.cpp.o"
 },
 {
-  "directory": "/home/ty/attach-bug/build",
-  "command": "/usr/bin/clang++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/ty/attach-bug/build/attach_bug_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtWidgets -isystem /usr/include/qt6/QtGui -g -fno-direct-access-external-data -o CMakeFiles/attach_bug.dir/MainWindow.cpp.o -c /home/ty/attach-bug/MainWindow.cpp",
-  "file": "/home/ty/attach-bug/MainWindow.cpp",
+  "directory": "/mnt/Data/coding/repro-qt-wayland-bug/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/mnt/Data/coding/repro-qt-wayland-bug/build/attach_bug_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtWidgets -isystem /usr/include/qt6/QtGui -g -mno-direct-extern-access -o CMakeFiles/attach_bug.dir/MainWindow.cpp.o -c /mnt/Data/coding/repro-qt-wayland-bug/MainWindow.cpp",
+  "file": "/mnt/Data/coding/repro-qt-wayland-bug/MainWindow.cpp",
   "output": "CMakeFiles/attach_bug.dir/MainWindow.cpp.o"
 },
 {
-  "directory": "/home/ty/attach-bug/build",
-  "command": "/usr/bin/clang++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/ty/attach-bug/build/attach_bug_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtWidgets -isystem /usr/include/qt6/QtGui -g -fno-direct-access-external-data -o CMakeFiles/attach_bug.dir/ReplacementWidget.cpp.o -c /home/ty/attach-bug/ReplacementWidget.cpp",
-  "file": "/home/ty/attach-bug/ReplacementWidget.cpp",
+  "directory": "/mnt/Data/coding/repro-qt-wayland-bug/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/mnt/Data/coding/repro-qt-wayland-bug/build/attach_bug_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtWidgets -isystem /usr/include/qt6/QtGui -g -mno-direct-extern-access -o CMakeFiles/attach_bug.dir/ReplacementWidget.cpp.o -c /mnt/Data/coding/repro-qt-wayland-bug/ReplacementWidget.cpp",
+  "file": "/mnt/Data/coding/repro-qt-wayland-bug/ReplacementWidget.cpp",
   "output": "CMakeFiles/attach_bug.dir/ReplacementWidget.cpp.o"
 },
 {
-  "directory": "/home/ty/attach-bug/build",
-  "command": "/usr/bin/clang++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/ty/attach-bug/build/attach_bug_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtWidgets -isystem /usr/include/qt6/QtGui -g -fno-direct-access-external-data -o CMakeFiles/attach_bug.dir/InitialWidget.cpp.o -c /home/ty/attach-bug/InitialWidget.cpp",
-  "file": "/home/ty/attach-bug/InitialWidget.cpp",
+  "directory": "/mnt/Data/coding/repro-qt-wayland-bug/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/mnt/Data/coding/repro-qt-wayland-bug/build/attach_bug_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtWidgets -isystem /usr/include/qt6/QtGui -g -mno-direct-extern-access -o CMakeFiles/attach_bug.dir/InitialWidget.cpp.o -c /mnt/Data/coding/repro-qt-wayland-bug/InitialWidget.cpp",
+  "file": "/mnt/Data/coding/repro-qt-wayland-bug/InitialWidget.cpp",
   "output": "CMakeFiles/attach_bug.dir/InitialWidget.cpp.o"
+},
+{
+  "directory": "/mnt/Data/coding/repro-qt-wayland-bug/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/mnt/Data/coding/repro-qt-wayland-bug/build/attach_bug_autogen/include -isystem /usr/include/qt6/QtCore -isystem /usr/include/qt6 -isystem /usr/lib/qt6/mkspecs/linux-g++ -isystem /usr/include/qt6/QtWidgets -isystem /usr/include/qt6/QtGui -g -mno-direct-extern-access -o CMakeFiles/attach_bug.dir/DisplayWidget.cpp.o -c /mnt/Data/coding/repro-qt-wayland-bug/DisplayWidget.cpp",
+  "file": "/mnt/Data/coding/repro-qt-wayland-bug/DisplayWidget.cpp",
+  "output": "CMakeFiles/attach_bug.dir/DisplayWidget.cpp.o"
 }
 ]

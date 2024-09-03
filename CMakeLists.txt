@@ -19,6 +19,8 @@ set(PROJECT_SOURCES
 	InitialWidget.cpp
 	InitialWidget.h
 	InitialWidget.ui
+    DisplayWidget.h
+    DisplayWidget.cpp
 )
 
 qt_add_executable(attach_bug ${PROJECT_SOURCES})
