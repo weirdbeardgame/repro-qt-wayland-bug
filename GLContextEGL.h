@@ -8,6 +8,21 @@ struct Version
     int minor_version;
 };
 
+class DynamicLibrary
+{
+
+public:
+    static std::string GetVersionedFilename(const char *libname, int major = -1, int minor = -1);
+
+    void *GetSymbolAddress(const char *name) const;
+    bool Open(const char *filename);
+
+    inline bool IsOpen() { return m_handle != nullptr; }
+
+private:
+    void *m_handle = nullptr;
+};
+
 struct WindowInfo
 {
     /// Connection to the display server. On most platforms except X11/Wayland, this is implicit and null.
@@ -52,7 +67,11 @@ protected:
     EGLSurface CreateFallbackSurface(EGLConfig config, void *window);
     EGLSurface TryCreatePlatformSurface(EGLConfig config, void *window);
     EGLSurface CreateWLSurface(EGLConfig config, void *win);
+
+    bool LoadEGL();
     bool LoadModule();
+
+    bool LoadGLADEGL(EGLDisplay display);
 
     bool m_use_ext_platform_base = false;
     bool m_supports_negative_swap_interval = false;

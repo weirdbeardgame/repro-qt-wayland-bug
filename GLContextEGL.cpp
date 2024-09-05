@@ -1,7 +1,75 @@
 #include "GLContextEGL.h"
 #include <dlfcn.h>
+#include "fmt/format.h"
+
+static DynamicLibrary s_egl_library;
+
+static std::atomic_uint32_t s_egl_refcount = 0;
 
 static const char *WAYLAND_EGL_MODNAME = "libwayland-egl.so.1";
+
+void *DynamicLibrary::GetSymbolAddress(const char *name) const
+{
+#ifdef _WIN32
+    return reinterpret_cast<void *>(GetProcAddress(reinterpret_cast<HMODULE>(m_handle), name));
+#else
+    return reinterpret_cast<void *>(dlsym(m_handle, name));
+#endif
+}
+
+std::string DynamicLibrary::GetVersionedFilename(const char *libname, int major, int minor)
+{
+
+    const char *prefix = std::strncmp(libname, "lib", 3) ? "lib" : "";
+    if (major >= 0 && minor >= 0)
+        return fmt::format("{}{}.so.{}.{}", prefix, libname, major, minor);
+    else if (major >= 0)
+        return fmt::format("{}{}.so.{}", prefix, libname, major);
+    else
+        return fmt::format("{}{}.so", prefix, libname);
+}
+
+bool DynamicLibrary::Open(const char *filename)
+{
+    m_handle = dlopen(filename, RTLD_NOW);
+
+    return m_handle != nullptr;
+}
+
+bool GLContextEGL::LoadEGL()
+{
+    // We're not going to be calling this from multiple threads concurrently.
+    // So, not wrapping this in a mutex should be fine.
+    if (s_egl_refcount.fetch_add(1, std::memory_order_acq_rel) == 0)
+    {
+        std::string egl_libname = DynamicLibrary::GetVersionedFilename("libEGL");
+        printf("Loading EGL from {}...", egl_libname);
+
+        if (!s_egl_library.Open(egl_libname.c_str()))
+        {
+            // Try versioned.
+            egl_libname = DynamicLibrary::GetVersionedFilename("libEGL", 1);
+            printf("Loading EGL from {}...", egl_libname);
+            if (!s_egl_library.Open(egl_libname.c_str()))
+                return false;
+        }
+    }
+
+    return s_egl_library.IsOpen();
+}
+
+bool GLContextEGL::LoadGLADEGL(EGLDisplay display)
+{
+    const int version =
+        gladLoadEGL(display, [](const char *name)
+                    { return (GLADapiproc)s_egl_library.GetSymbolAddress(name); });
+    if (version == 0)
+    {
+        return false;
+    }
+
+    return true;
+}
 
 bool GLContextEGL::CheckConfigSurfaceFormat(EGLConfig config)
 {
@@ -190,7 +258,10 @@ bool GLContextEGL::CreateSurface()
 
 bool GLContextEGL::InitGL()
 {
-    // const int version = gladLoadEGL()
+    if (!LoadGLADEGL(EGL_NO_DISPLAY))
+    {
+        return false;
+    }
 }
 
 bool GLContextEGL::LoadModule()
@@ -214,4 +285,11 @@ bool GLContextEGL::LoadModule()
     }
 
     return true;
+}
+
+GLContextEGL::~GLContextEGL()
+{
+    // DestroySurface();
+    // DestroyContext();
+    // UnloadEGL();
 }

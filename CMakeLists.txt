@@ -10,6 +10,7 @@ find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS WaylandCompositor)
 
+add_subdirectory(extern/fmt)
 add_subdirectory(extern/glad)
 
 set(PROJECT_SOURCES
@@ -33,3 +34,4 @@ qt_add_executable(attach_bug ${PROJECT_SOURCES})
 target_link_libraries(attach_bug PRIVATE Qt6::Widgets)
 target_link_libraries(attach_bug PRIVATE Qt6::WaylandCompositor)
 target_link_libraries(attach_bug PRIVATE glad)
+target_link_libraries(attach_bug PRIVATE fmt)
