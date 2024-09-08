@@ -1,64 +1,104 @@
 #include "MainWindow.h"
+#include "glad/gl.h"
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
-  ui.setupUi(this);
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
+{
+    ui.setupUi(this);
 
-  initialWidget = new InitialWidget(this);
-  initialWidget->setStyleSheet("background-color: #f0f0ff;");
-  setCentralWidget(initialWidget);
+    initialWidget = new InitialWidget(this);
+    initialWidget->setStyleSheet("background-color: #f0f0ff;");
+    setCentralWidget(initialWidget);
 }
 
 MainWindow::~MainWindow() {}
 
-QWidget *MainWindow::getContentParent() 
+QWidget *MainWindow::getContentParent()
 {
-  return s_use_central_widget ? static_cast<QWidget *>(this): static_cast<QWidget *>(initialWidget);
+    return s_use_central_widget ? static_cast<QWidget *>(this) : static_cast<QWidget *>(initialWidget);
 }
 
-void MainWindow::on_actionDetach_triggered() {
+void MainWindow::on_actionDetach_triggered()
+{
 
-  initialWidget->setVisible(false);
-  takeCentralWidget();
-  initialWidget->setParent(this);
+    initialWidget->setVisible(false);
+    takeCentralWidget();
+    initialWidget->setParent(this);
 
-  setCentralWidget(replacementWidget);
+    createDisplayWidget(false, true);
+    InitEGL();
 
-  update();
+    setCentralWidget(displayWidget);
+
+    update();
 }
 
-void MainWindow::on_actionAttach_triggered() {
-  takeCentralWidget();
-  initialWidget->setVisible(true);
+void MainWindow::InitEGL()
+{
 
-  // replacementWidget->deleteLater();
-  replacementWidget = nullptr;
+    static GLContextEGL *local;
 
-  setCentralWidget(initialWidget);
-  initialWidget->show();
-  update();
+    // We need at least GL3.3.
+    static constexpr Version vlist[] = {
+        {4, 6},
+        {4, 5},
+        {4, 4},
+        {4, 3},
+        {4, 2},
+        {4, 1},
+        {4, 0},
+        {3, 3},
+    };
 
+    eglContext = GLContextEGL::Create(wi, vlist);
+    if (!eglContext)
+    {
+        return;
+    }
+
+    local = eglContext.get();
+
+    if (!gladLoadGL([](const char *name)
+                    { return reinterpret_cast<GLADapiproc>(local->GetProcAddress(name)); }))
+    {
+        printf("Failed to InitEGLContext!");
+    }
 }
 
-void MainWindow::createDisplayWidget(bool fullscreen, bool render_to_main) {
-  QWidget *container;
+void MainWindow::on_actionAttach_triggered()
+{
+    takeCentralWidget();
+    initialWidget->setVisible(true);
 
-  displayWidget = new DisplayWidget((!fullscreen && render_to_main) ? getContentParent() : nullptr);
-  container = displayWidget;
+    // replacementWidget->deleteLater();
+    displayWidget = nullptr;
 
-  if (fullscreen || !render_to_main) {
-    container->setWindowTitle(windowTitle());
-    container->setWindowIcon(windowIcon());
-  }
+    setCentralWidget(initialWidget);
+    initialWidget->show();
+    update();
+}
 
-  initialWidget->setVisible(false);
-  
-  takeCentralWidget();
-  
-  initialWidget->setParent(this);
-  
-  setCentralWidget(displayWidget);
-  
-  displayWidget->setFocus();
-  
-  update();
+void MainWindow::createDisplayWidget(bool fullscreen, bool render_to_main)
+{
+    QWidget *container;
+
+    displayWidget = new DisplayWidget((!fullscreen && render_to_main) ? getContentParent() : nullptr);
+    container = displayWidget;
+
+    if (fullscreen || !render_to_main)
+    {
+        container->setWindowTitle(windowTitle());
+        container->setWindowIcon(windowIcon());
+    }
+
+    initialWidget->setVisible(false);
+
+    takeCentralWidget();
+
+    initialWidget->setParent(this);
+
+    setCentralWidget(displayWidget);
+
+    displayWidget->setFocus();
+
+    update();
 }

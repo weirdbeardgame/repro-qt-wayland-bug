@@ -8,6 +8,11 @@ static std::atomic_uint32_t s_egl_refcount = 0;
 
 static const char *WAYLAND_EGL_MODNAME = "libwayland-egl.so.1";
 
+GLContextEGL::GLContextEGL(const WindowInfo &wi)
+{
+    m_wi = wi;
+}
+
 void *DynamicLibrary::GetSymbolAddress(const char *name) const
 {
 #ifdef _WIN32
@@ -285,6 +290,147 @@ bool GLContextEGL::LoadModule()
     }
 
     return true;
+}
+
+bool GLContextEGL::CreateContextAndSurface(const Version &version, EGLContext share_context, bool make_current)
+{
+    if (!CreateContext(version, share_context))
+        return false;
+
+    if (!CreateSurface())
+    {
+        // Console.Error("Failed to create surface for context");
+        eglDestroyContext(m_display, m_context);
+        m_context = EGL_NO_CONTEXT;
+        return false;
+    }
+
+    if (make_current && !eglMakeCurrent(m_display, m_surface, m_surface, m_context))
+    {
+        // Console.ErrorFmt("eglMakeCurrent() failed: 0x{:x}", eglGetError());
+        if (m_surface != EGL_NO_SURFACE)
+        {
+            eglDestroySurface(m_display, m_surface);
+            m_surface = EGL_NO_SURFACE;
+        }
+        eglDestroyContext(m_display, m_context);
+        m_context = EGL_NO_CONTEXT;
+        return false;
+    }
+
+    return true;
+}
+
+EGLDisplay GLContextEGL::TryGetPlatformDisplay(EGLenum platform, const char *platform_ext)
+{
+    const char *extensions_str = eglQueryString(EGL_NO_DISPLAY, EGL_EXTENSIONS);
+    if (!extensions_str)
+    {
+        // Console.WriteLn("No extensions supported.");
+        return EGL_NO_DISPLAY;
+    }
+
+    EGLDisplay dpy = EGL_NO_DISPLAY;
+    if (platform_ext && std::strstr(extensions_str, platform_ext))
+    {
+        // Console.WriteLnFmt("Using EGL platform {}.", platform_ext);
+
+        PFNEGLGETPLATFORMDISPLAYEXTPROC get_platform_display_ext =
+            (PFNEGLGETPLATFORMDISPLAYEXTPROC)eglGetProcAddress("eglGetPlatformDisplayEXT");
+        if (get_platform_display_ext)
+        {
+            dpy = get_platform_display_ext(platform, m_wi.display_connection, nullptr);
+            m_use_ext_platform_base = (dpy != EGL_NO_DISPLAY);
+            if (!m_use_ext_platform_base)
+            {
+                const EGLint err = eglGetError();
+                // Console.ErrorFmt("eglGetPlatformDisplayEXT() failed: {} (0x{:X})", err, err);
+            }
+        }
+        else
+        {
+            // Console.Warning("eglGetPlatformDisplayEXT() was not found");
+        }
+    }
+    else
+    {
+        // Console.WarningFmt("{} is not supported.", platform_ext);
+    }
+
+    return dpy;
+}
+
+EGLDisplay GLContextEGL::GetFallbackDisplay()
+{
+    EGLDisplay dpy = eglGetDisplay((wl_display *)m_wi.display_connection);
+    if (dpy == EGL_NO_DISPLAY)
+    {
+        const EGLint err = eglGetError();
+    }
+
+    return dpy;
+}
+
+EGLDisplay GLContextEGL::GetPlatformDisplay()
+{
+    EGLDisplay dpy = TryGetPlatformDisplay(EGL_PLATFORM_SURFACELESS_MESA, "EGL_MESA_platform_surfaceless");
+    if (dpy == EGL_NO_DISPLAY)
+        dpy = GetFallbackDisplay();
+
+    return dpy;
+}
+
+bool GLContextEGL::Initialize(std::span<const Version> versions_to_try)
+{
+    if (!LoadGLADEGL(EGL_NO_DISPLAY))
+        return false;
+
+    m_display = GetPlatformDisplay();
+    if (m_display == EGL_NO_DISPLAY)
+        return false;
+
+    int egl_major, egl_minor;
+    if (!eglInitialize(m_display, &egl_major, &egl_minor))
+    {
+        const int gerror = static_cast<int>(eglGetError());
+
+        printf("eglInitlize() failed: %d", gerror);
+        return false;
+    }
+
+    // Re-initialize EGL/GLAD.
+    if (!LoadGLADEGL(m_display))
+    {
+        return false;
+    }
+    if (!GLAD_EGL_KHR_surfaceless_context)
+    {
+        // Console.Warning("EGL implementation does not support surfaceless contexts, emulating with pbuffers");
+    }
+    for (const Version &cv : versions_to_try)
+    {
+        if (CreateContextAndSurface(cv, nullptr, true))
+        {
+            return true;
+        }
+    }
+
+    // Error::SetStringView(error, "Failed to create any context versions");
+    return false;
+}
+
+std::unique_ptr<GLContextEGL> GLContextEGL::Create(const WindowInfo &wi, std::span<const Version> versions_to_try)
+{
+    std::unique_ptr<GLContextEGL> context = std::make_unique<GLContextEGL>(wi);
+    if (!context->LoadModule() || !context->Initialize(versions_to_try))
+        return nullptr;
+
+    return context;
+}
+
+void *GLContextEGL::GetProcAddress(const char *name)
+{
+    return reinterpret_cast<void *>(eglGetProcAddress(name));
 }
 
 GLContextEGL::~GLContextEGL()

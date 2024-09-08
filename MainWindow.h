@@ -3,6 +3,7 @@
 #include "ReplacementWidget.h"
 #include "InitialWidget.h"
 #include "DisplayWidget.h"
+#include "GLContextEGL.h"
 
 #include <QMainWindow>
 #include <QListWidget>
@@ -12,13 +13,13 @@
 
 class MainWindow : public QMainWindow
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	MainWindow(QWidget *parent = 0);
-	~MainWindow();
+    MainWindow(QWidget *parent = 0);
+    ~MainWindow();
 
-    QWidget* getContentParent();
+    QWidget *getContentParent();
 
     static bool isNeeded(bool fullscreen, bool render_to_main);
 
@@ -26,17 +27,21 @@ public:
 
     void removeDisplayWidget(bool show_game_list);
 
+    void InitEGL();
+
     bool s_use_central_widget;
 
 private slots:
-	void on_actionDetach_triggered();
-	void on_actionAttach_triggered();
+    void on_actionDetach_triggered();
+    void on_actionAttach_triggered();
 
 private:
-	Ui::MainWindow ui;
+    Ui::MainWindow ui;
 
-	InitialWidget *initialWidget = nullptr;
+    WindowInfo wi;
+
+    InitialWidget *initialWidget = nullptr;
     DisplayWidget *displayWidget = nullptr;
 
-	ReplacementWidget *replacementWidget = nullptr;
+    std::unique_ptr<GLContextEGL> eglContext;
 };

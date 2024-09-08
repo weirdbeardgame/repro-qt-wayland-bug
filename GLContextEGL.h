@@ -1,4 +1,5 @@
 #include "DisplayWidget.h"
+#include <span>
 #include <wayland-egl.h>
 #include "glad/egl.h"
 
@@ -50,7 +51,7 @@ struct WindowInfo
 class GLContextEGL
 {
 
-protected:
+public:
     EGLDisplay m_display = EGL_NO_DISPLAY;
     EGLSurface m_surface = EGL_NO_SURFACE;
     EGLContext m_context = EGL_NO_CONTEXT;
@@ -58,20 +59,31 @@ protected:
     EGLConfig m_config = {};
 
     GLContextEGL();
+    GLContextEGL(const WindowInfo &wi);
     ~GLContextEGL();
 
     bool InitGL();
     bool CreateContext(const Version &version, EGLContext share_context);
     bool CheckConfigSurfaceFormat(EGLConfig config);
     bool CreateSurface();
+
+    EGLDisplay GetPlatformDisplay();
+    EGLDisplay GetFallbackDisplay();
+    EGLDisplay TryGetPlatformDisplay(EGLenum platform, const char *platform_ext);
+
     EGLSurface CreateFallbackSurface(EGLConfig config, void *window);
     EGLSurface TryCreatePlatformSurface(EGLConfig config, void *window);
     EGLSurface CreateWLSurface(EGLConfig config, void *win);
 
     bool LoadEGL();
     bool LoadModule();
-
     bool LoadGLADEGL(EGLDisplay display);
+    bool Initialize(std::span<const Version> versions_to_try);
+    bool CreateContextAndSurface(const Version &version, EGLContext share_context, bool make_current);
+
+    void *GetProcAddress(const char *name);
+
+    static std::unique_ptr<GLContextEGL> Create(const WindowInfo &wi, std::span<const Version> versions_to_try);
 
     bool m_use_ext_platform_base = false;
     bool m_supports_negative_swap_interval = false;
