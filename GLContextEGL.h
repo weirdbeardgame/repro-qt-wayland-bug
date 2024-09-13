@@ -5,98 +5,118 @@
 
 struct Version
 {
-    int major_version;
-    int minor_version;
+	int major_version;
+	int minor_version;
 };
 
 class DynamicLibrary
 {
 
 public:
-    static std::string GetVersionedFilename(const char *libname, int major = -1, int minor = -1);
+	static std::string GetVersionedFilename(const char *libname, int major = -1, int minor = -1);
 
-    void *GetSymbolAddress(const char *name) const;
-    bool Open(const char *filename);
+	void *GetSymbolAddress(const char *name) const;
+	bool Open(const char *filename);
 
-    inline bool IsOpen() { return m_handle != nullptr; }
+	inline bool IsOpen() { return m_handle != nullptr; }
 
 private:
-    void *m_handle = nullptr;
+	void *m_handle = nullptr;
 };
 
 struct WindowInfo
 {
-    /// Connection to the display server. On most platforms except X11/Wayland, this is implicit and null.
-    void *display_connection = nullptr;
 
-    /// Abstract handle to the window. This depends on the surface type.
-    void *window_handle = nullptr;
+	enum class Type
+	{
+		Surfaceless,
+		Win32,
+		X11,
+		Wayland,
+		MacOS
+	};
 
-    /// For platforms where a separate surface/layer handle is needed, it is stored here (e.g. MacOS).
-    void *surface_handle = nullptr;
+	/// The type of the surface. Surfaceless indicates it will not be displayed on screen at all.
+	Type type = Type::Surfaceless;
 
-    /// Width of the surface in pixels.
-    uint32_t surface_width = 0;
+	/// Connection to the display server. On most platforms except X11/Wayland, this is implicit and null.
+	void *display_connection = nullptr;
 
-    /// Height of the surface in pixels.
-    uint32_t surface_height = 0;
+	/// Abstract handle to the window. This depends on the surface type.
+	void *window_handle = nullptr;
 
-    /// DPI scale for the surface.
-    float surface_scale = 1.0f;
+	/// For platforms where a separate surface/layer handle is needed, it is stored here (e.g. MacOS).
+	void *surface_handle = nullptr;
 
-    /// Refresh rate of the surface, if available.
-    float surface_refresh_rate = 0.0f;
+	/// Width of the surface in pixels.
+	uint32_t surface_width = 0;
+
+	/// Height of the surface in pixels.
+	uint32_t surface_height = 0;
+
+	/// DPI scale for the surface.
+	float surface_scale = 1.0f;
+
+	/// Refresh rate of the surface, if available.
+	float surface_refresh_rate = 0.0f;
 };
 
 class GLContextEGL
 {
 
 public:
-    EGLDisplay m_display = EGL_NO_DISPLAY;
-    EGLSurface m_surface = EGL_NO_SURFACE;
-    EGLContext m_context = EGL_NO_CONTEXT;
+	EGLDisplay m_display = EGL_NO_DISPLAY;
+	EGLSurface m_surface = EGL_NO_SURFACE;
+	EGLContext m_context = EGL_NO_CONTEXT;
 
-    EGLConfig m_config = {};
+	EGLConfig m_config = {};
 
-    GLContextEGL();
-    GLContextEGL(const WindowInfo &wi);
-    ~GLContextEGL();
+	GLContextEGL();
+	GLContextEGL(const WindowInfo &wi);
+	~GLContextEGL();
 
-    bool InitGL();
-    bool CreateContext(const Version &version, EGLContext share_context);
-    bool CheckConfigSurfaceFormat(EGLConfig config);
-    bool CreateSurface();
+	bool InitGL();
+	bool CreateContext(const Version &version, EGLContext share_context);
+	bool CheckConfigSurfaceFormat(EGLConfig config);
 
-    EGLDisplay GetPlatformDisplay();
-    EGLDisplay GetFallbackDisplay();
-    EGLDisplay TryGetPlatformDisplay(EGLenum platform, const char *platform_ext);
+	bool ChangeSurface(const WindowInfo &new_wi);
+	bool CreateSurface();
 
-    EGLSurface CreateFallbackSurface(EGLConfig config, void *window);
-    EGLSurface TryCreatePlatformSurface(EGLConfig config, void *window);
-    EGLSurface CreateWLSurface(EGLConfig config, void *win);
+	void DestroySurface();
 
-    bool LoadEGL();
-    bool LoadModule();
-    bool LoadGLADEGL(EGLDisplay display);
-    bool Initialize(std::span<const Version> versions_to_try);
-    bool CreateContextAndSurface(const Version &version, EGLContext share_context, bool make_current);
+	bool UpdateWindow();
 
-    void *GetProcAddress(const char *name);
+	EGLDisplay GetPlatformDisplay();
+	EGLDisplay GetFallbackDisplay();
+	EGLDisplay TryGetPlatformDisplay(EGLenum platform, const char *platform_ext);
 
-    static std::unique_ptr<GLContextEGL> Create(const WindowInfo &wi, std::span<const Version> versions_to_try);
+	EGLSurface CreateFallbackSurface(EGLConfig config, void *window);
+	EGLSurface TryCreatePlatformSurface(EGLConfig config, void *window);
+	EGLSurface CreateWLSurface(EGLConfig config, void *win);
 
-    bool m_use_ext_platform_base = false;
-    bool m_supports_negative_swap_interval = false;
+	bool LoadEGL();
+	bool LoadModule();
+	bool CreatePBufferSurface();
+	bool LoadGLADEGL(EGLDisplay display);
+	bool Initialize(std::span<const Version> versions_to_try);
+	bool CreateContextAndSurface(const Version &version, EGLContext share_context, bool make_current);
 
-    Version m_version = {};
+	void *GetProcAddress(const char *name);
 
-    // Wayland window or surface stuffs
+	static std::unique_ptr<GLContextEGL> Create(const WindowInfo &wi, std::span<const Version> versions_to_try);
 
-    WindowInfo m_wi;
-    wl_egl_window *m_wl_window = nullptr;
+	bool m_use_ext_platform_base = false;
+	bool m_supports_negative_swap_interval = false;
 
-    void *m_wl_module = nullptr;
-    wl_egl_window *(*m_wl_egl_window_create)(struct wl_surface *surface, int width, int height);
-    void (*m_wl_egl_window_destroy)(struct wl_egl_window *egl_window);
-    void (*m_wl_egl_window_resize)(struct wl_egl_window *egl_window, int width, int height, int dx, int dy);
+	Version m_version = {};
+
+	// Wayland window or surface stuffs
+
+	WindowInfo m_wi;
+	wl_egl_window *m_wl_window = nullptr;
+
+	void *m_wl_module = nullptr;
+	wl_egl_window *(*m_wl_egl_window_create)(struct wl_surface *surface, int width, int height);
+	void (*m_wl_egl_window_destroy)(struct wl_egl_window *egl_window);
+	void (*m_wl_egl_window_resize)(struct wl_egl_window *egl_window, int width, int height, int dx, int dy);
 };
